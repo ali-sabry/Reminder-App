@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Meta Tags -->
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Css Links -->
+		<link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<!-- Icon -->
+		<link rel="icon" href="img/favicon.png" />
+		<!-- Site Title -->
+		<title>Reminder App</title>
+	</head>
+	<body>
+		<!-- Start Main Tag That Contains All Sections -->
+		<main>
+			<!-- Start Side Navbar -->
+			<div class="container">
+				<h1 class="reminder_head">reminder</h1>
+				<div class="reminder-app">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<div class="reminder_parent">
+									<!-- Reminder Set Button -->
+									<button id="set_btn" class="set_btn main_btn">
+									</button>
+									<!-- Reminder Data Fill -->
+									<div class="reminder_fill">
+										<form action="" id="form">
+											<!-- Set The Time And Date -->
+											<input type="date" id="date" required>
+											<input type="time" id="time" required>
+											<!-- Type The Title Of Reminder -->
+											<input type="text" id="title" placeholder=" title" required>
+											<!-- Reminder subject -->
+											<textarea name="subject" id="subject" cols="30" rows="5" placeholder=" description"></textarea>
+											<!-- The Result -->
+											<div class="message"></div>
+										</form>
+										<!-- Add Button To Add subject-->
+										<button class="add_btn main_btn" id="add_btn">add reminder</button>
+									</div>
+									<!-- Result Box -->
+									<div class="result"></div>
+									<div class="tabs">
+										<div class="buttons">
+											<span class="all" title="All Tasks">
+											</span>
+											<span class="completed_btn" title="Completed Tasks">
+											</span>
+											<span class="delete_all" title="Delete All">
+											</span>
+										</div>
+										<div class="count"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Side Navbar -->
+		</main>
+		<!-- End Main Tag That Contains All Sections -->
+		<!-- Js Scripts -->
+		<script src="js/main.js"></script>
+	</body>
+</html>

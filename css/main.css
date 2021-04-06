@@ -1,0 +1,316 @@
+/******************************************************************
+Theme Name  : Reminder App
+Description : Modern Reminder App With vanila Javascript
+Author      : Ali Sabry
+Author URL  : Ali Sabry
+Version     : 1.0
+Created     : 2021
+******************************************************************/
+/*------------------------------------------------------------------
+
+-------------------------------------------------------------------*/
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Recursive:wght@400;500&display=swap");
+/* Start Puplic Style Of Theme */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 15px;
+  font-family: "Recursive", sans-serif;
+  background-image: url("../img/main-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar,
+.result::-webkit-scrollbar {
+  width: 7px;
+  background-color: #fff;
+}
+
+body::-webkit-scrollbar-track,
+.result::-webkit-scrollbar-track {
+  box-shadow: 0 0 56px rgba(255, 255, 255, 0.3);
+}
+
+body::-webkit-scrollbar-thumb,
+.result::-webkit-scrollbar-thumb {
+  background-color: #000;
+  outline: 1px solid #000;
+}
+
+.main_btn {
+  padding: 14px 24px;
+  text-transform: capitalize;
+  line-height: 10px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.5);
+  background: #000;
+}
+
+.main_btn:hover {
+  text-decoration: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+::placeholder {
+  text-transform: capitalize;
+  text-indent: 5px;
+  font-size: 16px;
+}
+
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+/* End Puplic Style Of Theme */
+/***********************************  Start Reminder App ************************************/
+.reminder_head {
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.reminder-app {
+  position: relative;
+  height: 100%;
+  padding-bottom: 70px;
+  z-index: 10;
+}
+.reminder-app:after, .reminder-app:before {
+  content: "";
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  backdrop-filter: blur(200px);
+  z-index: -1 !important;
+  position: absolute;
+  top: -64px;
+  right: -31px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(200px);
+}
+.reminder-app:before {
+  position: absolute;
+  top: 71%;
+  left: -35px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.reminder-app .reminder_parent {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 30px 0 0;
+  backdrop-filter: blur(200px);
+  position: relative;
+}
+.reminder-app .reminder_parent .set_btn {
+  display: block;
+  border: none;
+  margin: 0 auto 20px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  background-image: url("../img/plus.png");
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.reminder-app .reminder_parent .set_btn:focus {
+  outline: none;
+}
+.reminder-app .reminder_parent .reminder_fill {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  display: none;
+}
+.reminder-app .reminder_parent .reminder_fill input, .reminder-app .reminder_parent .reminder_fill textarea {
+  display: block;
+  width: 90%;
+  margin: 17px auto;
+  border: none;
+  border-radius: 3px;
+  text-indent: 10px;
+  padding-top: 7px;
+}
+.reminder-app .reminder_parent .reminder_fill input:focus, .reminder-app .reminder_parent .reminder_fill textarea:focus {
+  outline: none;
+  border: none;
+}
+.reminder-app .reminder_parent .reminder_fill input[type="date"],
+.reminder-app .reminder_parent .reminder_fill input[type="time"] {
+  padding: 5px 0;
+  text-indent: 2px;
+}
+.reminder-app .reminder_parent .reminder_fill input[type="text"] {
+  padding: 7px 0;
+}
+.reminder-app .reminder_parent .reminder_fill textarea {
+  max-width: 90%;
+  resize: none;
+}
+.reminder-app .reminder_parent .reminder_fill .message {
+  color: #f00;
+  font-weight: bold;
+  margin-bottom: 14px;
+  font-size: 22px;
+}
+.reminder-app .reminder_parent .reminder_fill .add_btn {
+  border-radius: 3px;
+  display: block;
+  width: 90%;
+  margin: auto;
+  border: none;
+}
+.reminder-app .reminder_parent .opened {
+  display: block;
+}
+.reminder-app .reminder_parent .result {
+  width: 100%;
+  height: 68vh;
+  padding: 0 34px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.reminder-app .reminder_parent .result .reminder_card, .reminder-app .reminder_parent .result .completed {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.reminder-app .reminder_parent .result .reminder_card .card_title, .reminder-app .reminder_parent .result .completed .card_title {
+  color: #000;
+  margin: 0;
+}
+.reminder-app .reminder_parent .result .reminder_card .card_subject, .reminder-app .reminder_parent .result .completed .card_subject {
+  line-height: 1.8;
+  width: 95%;
+  text-align: left;
+  overflow: hidden;
+  word-break: break-all;
+}
+.reminder-app .reminder_parent .result .reminder_card .card_option, .reminder-app .reminder_parent .result .completed .card_option {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0 8px;
+  border-radius: 5px;
+  color: #000;
+}
+@media (max-width: 567px) {
+  .reminder-app .reminder_parent .result .reminder_card .card_option, .reminder-app .reminder_parent .result .completed .card_option {
+    font-size: 8px !important;
+  }
+}
+@media (max-width: 768px) {
+  .reminder-app .reminder_parent .result .reminder_card .card_option, .reminder-app .reminder_parent .result .completed .card_option {
+    font-size: 12px !important;
+  }
+}
+.reminder-app .reminder_parent .result .reminder_card .card_option .card_date, .reminder-app .reminder_parent .result .reminder_card .card_option .card_time, .reminder-app .reminder_parent .result .completed .card_option .card_date, .reminder-app .reminder_parent .result .completed .card_option .card_time {
+  display: block;
+  font-weight: bold;
+}
+.reminder-app .reminder_parent .result .reminder_card .card_option .card_delete, .reminder-app .reminder_parent .result .completed .card_option .card_delete {
+  display: inline-block;
+  font-size: 25px;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  background-image: url("../img/remove.png");
+  background-size: cover;
+  background-position: center;
+}
+@media (max-width: 567px) {
+  .reminder-app .reminder_parent .result .reminder_card .card_option .card_delete, .reminder-app .reminder_parent .result .completed .card_option .card_delete {
+    width: 15px !important;
+    height: 15px !important;
+  }
+}
+@media (max-width: 768px) {
+  .reminder-app .reminder_parent .result .reminder_card .card_option .card_delete, .reminder-app .reminder_parent .result .completed .card_option .card_delete {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+.reminder-app .reminder_parent .result .reminder_card .dif_time, .reminder-app .reminder_parent .result .completed .dif_time {
+  display: none;
+}
+.reminder-app .reminder_parent .result .completed {
+  box-shadow: 6px 6px 40px #000;
+  text-decoration: line-through;
+  opacity: .8;
+}
+.reminder-app .reminder_parent .tabs {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 20px;
+}
+.reminder-app .reminder_parent .tabs .buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  float: left;
+}
+.reminder-app .reminder_parent .tabs .buttons span {
+  display: block;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 0 5px 0 #000;
+  cursor: pointer;
+  opacity: .5;
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-position: top;
+}
+.reminder-app .reminder_parent .tabs .buttons span:first-of-type {
+  background-image: url("../img/all.png");
+}
+.reminder-app .reminder_parent .tabs .buttons span:nth-of-type(2) {
+  background-image: url("../img/completed.png");
+}
+.reminder-app .reminder_parent .tabs .buttons span:last-of-type {
+  background-image: url("../img/delete-all.png");
+}
+.reminder-app .reminder_parent .tabs .buttons .active {
+  opacity: 1;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
+  background-color: red;
+}
+.reminder-app .reminder_parent .count {
+  color: #000;
+  font-size: 22px;
+  text-align: right;
+  width: 30%;
+}
+
+/***********************************  End Reminder App ************************************/
+
+/*# sourceMappingURL=main.css.map */
