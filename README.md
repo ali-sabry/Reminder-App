@@ -1,4 +1,4 @@
-# Reminder App ![First Version (latest by date)](https://img.shields.io/docker/v/ali-sabry/Reminder-App)
+# Reminder App ![version](https://img.shields.io/badge/version-1.1-brightgreen)
 
 # General info
 This A Reminder Web App Created With Vannila Js And Bootstrap Grid.
