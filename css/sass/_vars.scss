@@ -1,0 +1,34 @@
+
+/*------------------------------------------------------------------
+
+-------------------------------------------------------------------*/
+
+// =================================== */
+//  Font Family and Colors Styles
+// =================================== */
+
+/* Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@400;500&display=swap');
+
+$main-font	     : 'Recursive', sans-serif;
+$transition      : all .5s ease-in-out; 
+$white			 : #fff;
+$black			 : #000;
+$main-shadow     : 0 0 40px 0 rgba(0, 0, 0, .5);
+
+
+/* SCSS HEX */
+$gradient: linear-gradient(45deg, #00bf, #ff003d);
+$rv-gradient: linear-gradient(-45deg, #00bf, #ff003d);
+$footer: #262626;
+$main-bg: #e9e4e6;
+
+
+
+
+
+
+
+// End Fonts And Color Vars 
+

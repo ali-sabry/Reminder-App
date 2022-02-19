@@ -1,69 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<!-- Meta Tags -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Css Links -->
-		<link rel="stylesheet" href="css/bootstrap-grid.min.css" />
-		<link rel="stylesheet" href="css/main.css" />
 		<!-- Icon -->
-		<link rel="icon" href="img/favicon.png" />
+		<link rel="icon" href="img/favicon.svg" />
+		<!-- Bootstrap Grid -->
+		<link rel="stylesheet" href="css/bootstrap-grid.min.css" />
+		<!-- Main Css File -->
+		<link rel="stylesheet" href="css/main.css" />
 		<!-- Site Title -->
 		<title>Reminder App</title>
 	</head>
 	<body>
-		<!-- Start Main Tag That Contains All Sections -->
+
+		<!-- Start Main Sections -->
 		<main>
-			<!-- Start Side Navbar -->
-			<div class="container">
+			<!-- Start Main Application Container -->
+			<div class="reminder_app">
+				<!-- App Main Head -->
 				<h1 class="reminder_head">reminder</h1>
-				<div class="reminder-app">
+				  <!-- Start Bootstrap Container-->
 					<div class="container">
 						<div class="row">
-							<div class="col-12">
-								<div class="reminder_parent">
-									<!-- Reminder Set Button -->
-									<button id="set_btn" class="set_btn main_btn">
-									</button>
-									<!-- Reminder Data Fill -->
-									<div class="reminder_fill">
-										<form action="" id="form">
-											<!-- Set The Time And Date -->
+							<!-- App Take Full Width From Grid -->
+							<div class="col">
+								<!-- Parent Contain My App Fields & Buttons & Saved Reminder-->
+								<div class="reminder_parent">		
+									<!-- Reminder Set Button  -->
+									<button id="set_btn" class="set_btn main_btn"></button>
+									<!-- Reminder Data Fill Inputs And Textarea -->
+									<div class="reminder_fill col-md-6">
+										<form action="Get" id="form">
+											<!-- Input Time And Date -->
 											<input type="date" id="date" required>
 											<input type="time" id="time" required>
-											<!-- Type The Title Of Reminder -->
+											<!-- Reminder Title -->
 											<input type="text" id="title" placeholder=" title" required>
-											<!-- Reminder subject -->
-											<textarea name="subject" id="subject" cols="30" rows="5" placeholder=" description"></textarea>
+											<!-- Reminder Subject -->
+											<textarea name="subject" id="subject" cols="30" rows="8" placeholder=" description"></textarea>
 											<!-- The Result -->
 											<div class="message"></div>
 										</form>
-										<!-- Add Button To Add subject-->
+										<!-- Button Added Created Reminder To Body -->
 										<button class="add_btn main_btn" id="add_btn">add reminder</button>
 									</div>
-									<!-- Result Box -->
-									<div class="result"></div>
+									<!-- Result Box Contains All Remiders Card After Created -->
+									<div class="result">
+										<div class="row justify-content-around"></div>
+									</div>
+									<!-- start Footer -->
 									<div class="tabs">
 										<div class="buttons">
-											<span class="all" title="All Tasks">
-											</span>
-											<span class="completed_btn" title="Completed Tasks">
-											</span>
-											<span class="delete_all" title="Delete All">
-											</span>
+											<!-- All Tasks Button -->
+											<span class="all" title="All Tasks"></span>
+											<!-- Show Completed Task Button -->
+											<span class="completed_btn" title="Completed Tasks"></span>
+											<!-- Delete All Tasks Button -->
+											<span class="delete_all" title="Delete All"></span>
 										</div>
+										<!-- Count Reminder You Created -->
 										<div class="count"></div>
 									</div>
+									<!-- End Footer -->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				  <!-- End Bootstrap Container -->
 			</div>
-			<!-- End Side Navbar -->
+			<!-- End Main Application Container -->
 		</main>
-		<!-- End Main Tag That Contains All Sections -->
+		<!-- End Main Sections -->
+
 		<!-- Js Scripts -->
 		<script src="js/main.js"></script>
 	</body>

@@ -1,0 +1,83 @@
+/******************************************************************
+	Theme Name  : Reminder App
+	Description : Modern Reminder App With vanila Javascript
+	Author      : Ali Sabry
+	Author URL  : Ali Sabry
+	Version     : 1.0
+	Created     : mar - 2021
+******************************************************************/
+
+/* Start Puplic Style Of Theme */
+* {
+	box-sizing: border-box;
+}
+// Body Global Style
+	body {
+		font-size: 15px;
+		font-family: $main-font;
+		background-color: $black;
+		overflow-x: hidden;
+	}
+// Set Scroll Bar To Body & Result Boxes
+	body::-webkit-scrollbar,
+	.result::-webkit-scrollbar {
+	width: 7px;
+	background-color: $white;
+	}
+	
+	body::-webkit-scrollbar-track,
+	.result::-webkit-scrollbar-track {
+	box-shadow: 0 0 56px rgba(255, 255, 255, 0.3);
+	}
+	
+	body::-webkit-scrollbar-thumb,
+	.result::-webkit-scrollbar-thumb {
+	background-color: $black;
+	outline: 1px solid $black;
+	}
+// Global Style To Main Buttons On Application [Create Reminder, Add Reminder]
+.main_btn {
+	cursor: pointer;
+	padding: 14px 24px;
+	text-transform: capitalize;
+	line-height: 10px;
+	text-align: center;
+	text-decoration: none;
+	color: $white;
+	font-weight: bold;
+	transition: $transition;
+	box-shadow: $main-shadow;	
+	background: $black;
+	// Hover Effect 
+	&:hover {
+		text-decoration: none;
+		box-shadow: none;
+		color: $white;
+	}
+}
+
+// Placeholder Global Style On Application
+::placeholder {
+	text-transform: capitalize;
+	text-indent: 5px;
+	font-size: 13px;
+	letter-spacing: 3px;
+}
+// [input & Textarea] On Focus Hide Placeholder
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+	opacity: 0;
+}
+// input[type="date"]
+// {
+//     display:block;
+  
+//     /* Solution 1 */
+//      -webkit-appearance: textfield;
+//     -moz-appearance: textfield;
+//     min-height: 1.2em; 
+  
+//     /* Solution 2 */
+//     /* min-width: 96%; */
+// }
+/* End Puplic Style Of Theme */

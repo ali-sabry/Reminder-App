@@ -1,25 +1,31 @@
 # Reminder App ![version](https://img.shields.io/badge/version-1.1-brightgreen)
+Catch Your Ideas & Work It later.
 
+```
+```
 # General info
-This A Reminder Web App Created With Vannila Js And Bootstrap Grid.
-App Name    : Reminder App
-Description : Modern Reminder App With vanila Javascript
-Author      : Ali Sabry
-Author URL  : [Ali Sabry](https://www.linkedin.com/in/ali-sabry/)
-Version     : 1.0
-Created     : 2021
+This application helps you to save your thoughts or create an alert to remind you of something you want to do later. The application saves all reminders even after closing the browser. The application shows you the browser notification at the exact time for each reminderز
 
+```
+```
 # Technologies 
-* Html
-* Css
-* Javascript
+* Html5
+* Css3 || Sass
+* Javascript(ES6)
 
+```
+```
 
 # Preview Link
-[Preview Link](https://ali-sabry.github.io/Reminder-App/)
+[Preview Link](https://ali-sabry.github.io/reminder-app/)
 
+```
+```
 # Lincess
 ******************************************************************/
 /*------------------------------------------------------------------
-All Copyright Resarved For [Ali sabry](https://www.linkedin.com/in/ali-sabry/)
+Author      : [Ali sabry](https://www.linkedin.com/in/ali-sabry/)
+Created     : 2021.
+
+All Copyright Reserved To Author [Ali sabry](https://www.linkedin.com/in/ali-sabry/)
 -------------------------------------------------------------------*/

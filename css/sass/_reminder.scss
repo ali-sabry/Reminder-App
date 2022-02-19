@@ -1,0 +1,231 @@
+/***********************************  Start Reminder App ************************************/
+
+// Application Header
+	.reminder_head {
+		color: $white;
+		text-align: center;
+		letter-spacing: 2px;
+		text-transform: capitalize;
+	}
+// Main Application Container  
+.reminder_app {
+	position: relative;
+	height: 100%;
+	padding-bottom: 70px;
+	z-index: 10;
+	// Inside Parent Contain [Fill Form, Boxes, Buttons]
+	.reminder_parent {
+	background-color: $main-bg;
+	border-radius: 5px;
+	padding: 30px 0 0;
+	position: relative;	
+	// Set Button To Slide Fill Form 
+	.set_btn {
+		display: block;
+		border: none;
+		margin: 0 auto 20px;
+		text-align: center;
+		padding: 0;
+		border-radius: 50%;
+    	width: 48px;
+    	height: 48px;
+    	text-align: center;
+    	background-image: url("../img/plus.svg");
+    	background-color: rgba(255, 255, 255, .3);
+    	&:focus {
+    	   outline: none;
+    	}
+	}
+	// Reminder Fill
+	.reminder_fill {
+		width: 100%;
+		padding: 10px;
+		text-align: center;
+		border-radius: 5px;
+		margin: 25px auto;
+		display: none;
+		// All Inputs
+		input,textarea {
+			display: block;
+			width: 90%;
+			margin: 17px auto;
+			border: none; 
+			border-radius: 3px;
+			text-indent: 5px;
+			&:focus {
+				outline: none;
+				border: none;
+			}
+		}
+		// Input Date
+		input[type="date"],
+		input[type="time"] {
+			padding: 5px 0;
+			text-indent: 2px;
+		}
+		// Input Text
+		input[type="text"] {
+			padding: 7px 0;
+		}
+		// Text area 
+		textarea {
+			max-width: 90%;
+			resize: none;
+		}
+		// Result Message
+		.message {
+			color: #f00;
+		    font-weight: bold;
+		    margin-bottom: 14px;
+		    font-size: 18px;
+		}
+		// Add Button
+		.add_btn {
+			border-radius: 3px;
+			display: block;
+			width: 90%;
+			margin: auto;
+			border: none;
+		}
+	}
+	// Toggle The Reminder Fill
+	.opened {
+		display: block;
+	}
+	// The Result
+	.result {
+		width: 100%;
+		height: 68vh;
+		padding: 0 34px;
+		overflow-y: auto;
+		overflow-x: hidden;		
+		.reminder_card {
+			background-image: $gradient;
+		}
+		// Grouping style
+		.reminder_card, .completed {
+			background-color: #fff;
+    		border-radius: 5px;
+    		padding: 15px;
+    		margin-bottom: 20px;
+		.card_title {
+			 margin: 0;
+		}
+		.card_subject {
+			line-height: 1.8;
+			width: 95%;
+			text-align: left;
+    		overflow: hidden;
+    		word-break: break-all;
+		}
+		.card_title, .card_subject {
+			color: $white;
+		}
+		.card_option {
+		    display: flex;
+		    justify-content: space-between;
+		    height: 35px;
+		    align-items: center;
+		    background: rgba(255,255,255 , .5);
+		    padding: 0 8px;
+		    border-radius: 5px;
+		    color: $black;
+		    @media (max-width: 567px) {
+		    	font-size: 8px !important;
+		    }
+		    @media (max-width: 768px) {
+		    	font-size: 12px !important;
+		    }
+			.card_date, .card_time {
+			    display: block;
+			    font-weight: bold;
+			}
+			.card_delete {
+				cursor: pointer;
+				display: inline-block;
+			    font-size: 25px;
+			    width: 28px;
+		    	height: 28px;
+		    	text-align: center;
+		    	background-image: url("../img/remove.svg");
+		    	background-size: cover;
+		    	background-position: center;
+		    	@media (max-width: 567px) {
+		    		width: 15px !important;
+		    		height: 15px !important;
+		    	}
+		    	@media (max-width: 768px) {
+		    		width: 20px !important;
+		    		height: 20px !important;
+		    	}
+			}
+		}
+		.dif_time {
+			display: none;
+		}
+	}
+	// Active And Completed Reminder
+	.completed {
+		box-shadow: 6px 6px 40px rgba(0, 0, 0, .35);
+		text-decoration: line-through;
+		opacity: .7;
+	}
+  }
+  	// Tabs
+	.tabs {		
+	    width: 100%;
+	    height: 44px;
+		padding: 5px 0;
+	    display: flex;
+	    align-items: center;
+		background-image: $rv-gradient;
+	    border-radius: 5px;
+	    overflow: hidden;
+	    text-align: center;
+	    margin-top: 20px;
+		.buttons {
+			width: 60%;
+	    	display: flex;
+	    	justify-content: space-around;
+	    	align-items: center;
+			// float: left;
+			span {
+				cursor: pointer;
+				display: block;
+				text-transform: capitalize;
+				font-weight: bold;
+				font-size: 18px;
+				box-shadow: 0 0 5px 0 $black;
+				width: 30px;
+				height: 30px;
+				padding: 5px;
+				border-radius: 5px;
+				background-size: cover;
+				background-position: top;
+				background-color: #f1f1f1b0;
+				opacity: 1;
+			}
+			span:first-of-type::after {
+				content: url("../img/all.svg");
+			}
+			span:nth-of-type(2)::after {
+				content: url("../img/completed.svg");
+			}
+			span:last-of-type::after {
+				content: url("../img/delete-all.svg");
+			}
+			.active {
+				opacity: 1;
+				background-color: $white;
+			};
+		};
+	};
+	.count {
+		color: $white;
+		font-size: 22px;
+		text-align: right;
+		width: 30%;
+	};
+  	};
+};
+/***********************************  End Reminder App ************************************/
