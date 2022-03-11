@@ -2,25 +2,24 @@
 Catch Your Ideas & Work It later.
 <img src="images/preview.png" >
 
-```
-```
+<hr />
+
 # Preview Link
 [Preview Link](https://ali-sabry.github.io/reminder-app/)
 
-```
-```
+<hr />
+
 # General info
 This application helps you to save your thoughts or create an alert to remind you of something you want to do later. The application saves all reminders even after closing the browser. The application shows you the browser notification at the exact time for each reminder.
 
-```
-```
+<hr />
+
 # Technologies 
 * Html5
 * Css3 || Sass
 * Javascript(ES6)
 
-```
-```
+<hr />
 
 # Lincess
 ******************************************************************/
