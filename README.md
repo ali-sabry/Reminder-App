@@ -10,7 +10,7 @@ Catch Your Ideas & Work It later.
 ```
 ```
 # General info
-This application helps you to save your thoughts or create an alert to remind you of something you want to do later. The application saves all reminders even after closing the browser. The application shows you the browser notification at the exact time for each reminderز
+This application helps you to save your thoughts or create an alert to remind you of something you want to do later. The application saves all reminders even after closing the browser. The application shows you the browser notification at the exact time for each reminder.
 
 ```
 ```
