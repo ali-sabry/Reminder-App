@@ -179,7 +179,7 @@
       // Notification Message
       function notify() {
         let notifyMessage = new Notification(`${nTiltle}`, {
-          icon: "../img/favicon.svg",
+          icon: "../images/favicon.svg",
           body: `${nSubject}`
         });
 

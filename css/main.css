@@ -132,7 +132,7 @@ textarea:focus::-webkit-input-placeholder {
   width: 48px;
   height: 48px;
   text-align: center;
-  background-image: url("../img/plus.svg");
+  background-image: url("../images/plus.svg");
   background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -273,7 +273,7 @@ textarea:focus::-webkit-input-placeholder {
   width: 28px;
   height: 28px;
   text-align: center;
-  background-image: url("../img/remove.svg");
+  background-image: url("../images/remove.svg");
   background-size: cover;
   background-position: center;
 }
@@ -351,15 +351,15 @@ textarea:focus::-webkit-input-placeholder {
 }
 
 .reminder_app .reminder_parent .tabs .buttons span:first-of-type::after {
-  content: url("../img/all.svg");
+  content: url("../images/all.svg");
 }
 
 .reminder_app .reminder_parent .tabs .buttons span:nth-of-type(2)::after {
-  content: url("../img/completed.svg");
+  content: url("../images/completed.svg");
 }
 
 .reminder_app .reminder_parent .tabs .buttons span:last-of-type::after {
-  content: url("../img/delete-all.svg");
+  content: url("../images/delete-all.svg");
 }
 
 .reminder_app .reminder_parent .tabs .buttons .active {

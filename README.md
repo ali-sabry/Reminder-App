@@ -1,5 +1,6 @@
 # Reminder App ![version](https://img.shields.io/badge/version-1.1-brightgreen)
 Catch Your Ideas & Work It later.
+<img src="images/preview.png" >
 
 ```
 ```

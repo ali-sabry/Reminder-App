@@ -30,7 +30,7 @@
     	width: 48px;
     	height: 48px;
     	text-align: center;
-    	background-image: url("../img/plus.svg");
+    	background-image: url("../images/plus.svg");
     	background-color: rgba(255, 255, 255, .3);
     	&:focus {
     	   outline: none;
@@ -147,7 +147,7 @@
 			    width: 28px;
 		    	height: 28px;
 		    	text-align: center;
-		    	background-image: url("../img/remove.svg");
+		    	background-image: url("../images/remove.svg");
 		    	background-size: cover;
 		    	background-position: center;
 		    	@media (max-width: 567px) {
@@ -206,13 +206,13 @@
 				opacity: 1;
 			}
 			span:first-of-type::after {
-				content: url("../img/all.svg");
+				content: url("../images/all.svg");
 			}
 			span:nth-of-type(2)::after {
-				content: url("../img/completed.svg");
+				content: url("../images/completed.svg");
 			}
 			span:last-of-type::after {
-				content: url("../img/delete-all.svg");
+				content: url("../images/delete-all.svg");
 			}
 			.active {
 				opacity: 1;
