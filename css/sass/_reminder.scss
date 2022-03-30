@@ -33,7 +33,7 @@
     	background-image: url("../images/plus.svg");
     	background-color: rgba(255, 255, 255, .3);
     	&:focus {
-    	   outline: none;
+    	 outline: none;
     	}
 	}
 	// Reminder Fill
@@ -101,6 +101,7 @@
 		overflow-x: hidden;		
 		.reminder_card {
 			background-image: $gradient;
+			height: fit-content;
 		}
 		// Grouping style
 		.reminder_card, .completed {
@@ -160,8 +161,8 @@
 		    	}
 			}
 		}
-		.dif_time {
-			display: none;
+		.dif_time, .current_t {
+			display: none !important;
 		}
 	}
 	// Active And Completed Reminder

@@ -15,36 +15,84 @@
     const theItems      = localStorage.getItem("items");
     const tabs          = document.querySelectorAll('.tabs span');
     const countNum      = document.querySelector('.count');
-  /** *********** End Set The Main letibiles ********** */
+    let timeout;
+  /** *********** End Set The Main letibiles ********** **/ 
 
-  /** *********** Start Add Button Function ********** */
-    // Show & Hide The Reminder Fill
+  /** *********** Start Toggled The Reminder Fill Panel ********** **/
     set_btn.onclick = () => {
       reminder_fill.classList.toggle("opened");
     };
-
-    // Fill The Input & Create Reminder Card
-    add_btn.onclick = () => {
-      // Check If The Input's Is Not Empty
-      if (date.value && time.value && title.value !== "") {
-        createdReminderBox();
-        saveCreated();
-        message.textContent = "sucsess";
-        add_btn.parentElement.style.display = "none";
-        window.location.reload();
-      } else { // Print Message To Fill Input's
-        message.textContent = "Sorry Input's Can't Be Empty";
-        Array.from(document.getElementsByTagName("input")).forEach( (element) => {
-          element.onfocus = () =>  {
-            message.textContent = "";
+  /** *********** End Toggled The Reminder Fill Panel ********** **/
+  
+  /** *********** Start Function Validation Date & Time *********** **/
+    function timeDateHandler(inputs) {
+      //==== Get The Real MilliSecond From Input Time And Decrease 2 Hours + Selected Date Milli Seconds
+      let selected;       
+      //==== Set NeW Date
+      let theDate = new Date();
+      //==== Set Value Of The New Date
+      let currentDate = new Date(theDate.getFullYear(), theDate.getMonth(), theDate.getDate(), 0, 0, 0);
+      let fullTimeWithoutSecond = new Date(theDate.getFullYear(), theDate.getMonth(), theDate.getDate(), theDate.getHours(), theDate.getMinutes(), 0);
+      let currentTime = fullTimeWithoutSecond - currentDate;
+      inputs.addEventListener('change', ()=> {
+        selected = inputs.valueAsNumber;
+        //======= Date Validation .
+        if (inputs === date) {
+          if( (selected - currentDate) < 0) {
+            message.textContent = 'Invaild Date'
+            inputs.value = '';
+            inputs.blur();
+            inputs.onclick = () => {
+              message.textContent = '';
+            }
           };
-        });
-      };
+        } else if (inputs === time) { //======== Time Validation .
+          if ( (selected - currentTime ) < 0) {
+            message.textContent = 'Invaild Time';
+            inputs.value = '';
+            inputs.blur();
+            inputs.onclick = () => {
+              message.textContent = '';
+            };
+          };
+        };
+      });
     };
-   
-  /** *********** End Add Button Function ********** */
+    timeDateHandler(date); timeDateHandler(time);
+  /** *********** End Function Validation Date & Time *********** **/
 
-  /** ************* Start The Function Created The Reminder Card ************* */
+  /** *********** Start Add Button Handler Function ********** **/
+    (function addBtnHandler() {      
+      add_btn.addEventListener('click', ()=> {
+        //===== Check If The Input's Is Not Empty
+        if (date.value && time.value && title.value !== "") {
+          //===== Run Created Box Function
+            createdReminderBox();
+          //====== Run Function Handler The Notifition To Every Reminder .  
+            handlerAllStoredNotification();
+          //==== Toggled The Form .
+            reminder_fill.classList.toggle("opened");
+          //===== Empty All Inputs .
+            Array.from(reminder_fill.querySelectorAll('input')).map((field)=> {
+              field.value = '';
+            });
+          //======= Empty The Textarea .  
+            subject.value = '';
+        } else {
+          //====== Show Error Message To Fill Input's
+          message.textContent = "Sorry Input's Can't Be Empty";
+          //====== Hide The Error Message On Focus At Input's OR Textarea
+          Array.from(document.getElementsByTagName("input")).forEach( (element) => {
+            element.onfocus = () =>  {
+              message.textContent = "";
+            };
+          });
+        };
+      });
+    }());
+  /** *********** End Add Button Handler Function ********** **/
+
+  /** ************* Start The Function Created The Reminder Card ************* **/
     function createdReminderBox() {
       const card          = document.createElement("div");
       const cardTitle     = document.createElement("h3");
@@ -93,76 +141,81 @@
 
         // Append Card To The Result Body
           result.prepend(card);
-    };
-  /** ************* End The Function Created The Reminder card ************* */
-
-  /** ************* Start The Function Saving the Created card ************* */
-    function saveCreated() {
-      // Saving The Elements Inside The Result Div
-      if (result.childElementCount !== 0) localStorage.setItem("items", result.innerHTML);
-    };
-    // Adding The Saved Elements To The Result Div
-    result.innerHTML = theItems;
-  /** ************* End The Function Saving the Created card ************* */
-
-  /** ************* Start The Function Removing The card ************* */
-    const deleteBtn = document.querySelectorAll(".card_delete");
-    // Loop Of Buttons
-    deleteBtn.forEach((button) => {
-      button.addEventListener("click", (btn) => {
-        // Remove The Current Card
-        btn.target.parentElement.parentElement.remove();
-        // Reset The Result Children After Deleting
-        localStorage.setItem("items", result.innerHTML);
-        // Refresh Page
-        window.location.reload();
-      });
-    });
-  /** ************* End The Function Removing The card ************* */
-
-  /** ************************** Start Function Hide & Show Cards  ******************************************* */      
-        // This Function Set Every Tabs Button Job
-        function tabsBtn(e) {
-            let t = document.querySelectorAll(".reminder_card"), // All Reminders
-                n = document.querySelectorAll(".completed"); // Completed Reminders
-            e.classList.contains("all") // Show All Boxes
-            ? (n.forEach((e) => (e.style.display = "block")), t.forEach((e) => (e.style.display = "block")),(set_btn.style.cssText = `opacity: 1; pointer-events: all`), (countNum.textContent = `All: ${result.childElementCount}`))
-            : e.classList.contains("completed_btn") // Show Completed Boxes
-            ? (t.forEach((e) => (e.style.display = "none")), n.forEach((e) => (e.style.display = "block")), (set_btn.style.cssText = `opacity: 0; pointer-events: none`), (countNum.textContent = `completed: ${n.length}`))
-            : ((result.innerHTML = ""), localStorage.removeItem("items"), window.location.reload());
-        };
-  /** ************************** End Function Hide & Show Cards ******************************************* */
-
-  /** ************************** Start Tabs Buttons Function ******************************************* */
-
-    tabs.forEach((e) => {
-    
-      // This Statement Set All Button As Default
-      if (e.classList.contains('all')) e.classList.add('active');
-
-      // Set The Count Message
-      countNum.textContent = `All: ${result.childElementCount}`;
-
-      // Click Buttons Statements
-      e.addEventListener('click', (event) => {
-
-        // Remove Active Class
-        e.parentElement.querySelectorAll('.active').forEach(element => {
-          element.classList.remove('active');
-        });
-
-        // Add Active
-        event.target.classList.add('active');
         
-        // Run The Function
-        tabsBtn(e);
+        // Run Saved Created Function
+          saveCreated();
 
-      });
-    });
+        // Run Delete Card Function
+          removeCard()
+    };
+  /** ************* End The Function Created The Reminder card ************* **/
 
-  /** ************************** End Tabs Buttons Funvtion ******************************************* */
+  /** ************* Start The Function Saving the Created card ************* **/
+    function saveCreated() {
+      //====== Run Handler All Stored Notification Function .
+      handlerAllStoredNotification();
+      //==== Saving Created Reminders To Local Storage .
+      localStorage.setItem("items", result.innerHTML);
+      //==== Set The Count Reminders .
+      countNum.textContent = `All: ${result.childElementCount}`;
+    };
+  /** ************* End The Function Saving the Created card ************* **/
 
-  /** ************************** Start Notification ******************************************* */
+  /** ************* Start Add All Saved Reminders To Result Container ************* **/
+    result.innerHTML = theItems;
+  /** ************* End Add All Saved Reminders To Result Container ************* **/
+
+  /** ************* Start The Function Removing The card ************* **/
+    function removeCard() {
+      //===== Loop Of Buttons
+        Array.from(document.querySelectorAll(".card_delete")).map((button) => {
+          button.addEventListener("click", (btn) => {
+            //==== Remove The Current Card
+            btn.target.parentElement.parentElement.remove();
+            //==== Reset The Result Children After Deleting
+            saveCreated();
+          });
+        });
+    };
+    removeCard();
+  /** ************* End The Function Removing The card ************* **/
+
+  /** ********** Start Function Handler Show All Reminders & Completed ************ **/      
+    function tabsBtn(btn) {
+        let allReminderCards   = document.querySelectorAll(".reminder_card"); //==== All Reminders
+        let allCompletedCards  = result.querySelectorAll(".completed"); //==== Completed Reminders
+        let showAllTasksBtn    = document.querySelector('.all');
+        btn.classList.contains("all") //===== Show All Boxes
+        ? (allReminderCards.forEach((card) => (card.style.display = "block")), allCompletedCards.forEach((compCard) => (compCard.style.display = "block")),(set_btn.style.cssText = `opacity: 1; pointer-events: all`), (countNum.textContent = `All: ${result.childElementCount}`))
+        : btn.classList.contains("completed_btn") //===== Show Completed Boxes
+        ? (allReminderCards.forEach((card) => (card.style.display = "none")), allCompletedCards.forEach((compCard) => (compCard.style.display = "block")), (reminder_fill.classList.remove('opened')), (set_btn.style.cssText = `opacity: 0; pointer-events: none`), (countNum.textContent = `completed: ${allCompletedCards.length}`))
+        : ((result.innerHTML = ""), showAllTasksBtn.click(), localStorage.removeItem("items"), saveCreated());
+    };
+  /** ********** End Function Handler Show All Reminders & Completed ************ **/ 
+
+  /** ********** Start Function Handler All Bottom Buttons Active Status ************** **/
+    (function tabsHandler() {
+        tabs.forEach((btn) => {
+          //===== This Statement Set All Button As Default
+          if (btn.classList.contains('all')) btn.classList.add('active');
+          //====== Set The Count Message
+          countNum.textContent = `All: ${result.childElementCount}`;
+          //===== Click Buttons Statements
+          btn.addEventListener('click', (event) => {
+            //===== Remove Active Class
+            btn.parentElement.querySelectorAll('.active').forEach(element => {
+              element.classList.remove('active');
+            });
+            //===== Add Active
+            event.target.classList.add('active');
+            //===== Run The Function Handler Show All Reminders & Completed 
+            tabsBtn(btn);
+          });
+        });
+    }());
+  /** ********** End Function Handler All Bottom Buttons Active Status **************** **/
+
+/** ************** Start Notification ****************** **/
     function notifyMe(nTiltle, nSubject) {
       // Check For Notification Permission
       if (!("Notification" in window)) {
@@ -179,10 +232,10 @@
       // Notification Message
       function notify() {
         let notifyMessage = new Notification(`${nTiltle}`, {
-          icon: "../images/favicon.svg",
+          icon: "images/favicon.svg",
           body: `${nSubject}`
         });
-
+        
         notifyMessage.onclick = () => {
           window.open("index.html");
         };
@@ -190,69 +243,98 @@
         setTimeout(notifyMessage.close.bind(notifyMessage), 7000);
       };
     };
-  /** ************************** End Notification ******************************************* */
+/** ************** End Notification ***************** **/
 
-  /** ************************** Start Finlize Reminder Notification And Sound ******************************************* */
-
-    // Creating The Span Created And Store Different Time
+/** ******* Start Function Store The Every Reminders Milliseconds ******* **/
     function storeMS(element) {
-      // Get The Real MilliSecond From Input Time And Decrease 2 Hours
-        let futDate = time.valueAsNumber - 7200000 + date.valueAsNumber,
-        // Set NeW Date
-          d = new Date(),
-        // Set Value Of The New Date
-          currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), 0),
-        // The Diffrent Time Between Current And Selected time
-          dif = futDate - currentDate,
+        //==== Get The Real MilliSecond From Input Time And Decrease 2 Hours + Selected Date Milli Seconds
+          let selectedDate = (time.valueAsNumber - 7200000) + date.valueAsNumber,
+        //==== Set NeW Date
+          theDate = new Date(),        
+        //==== Set Value Of The New Date
+          currentDate = new Date(theDate.getFullYear(), theDate.getMonth(), theDate.getDate(), theDate.getHours(), theDate.getMinutes(), 0),
+        //=== The Diffrent Time Between Current And Selected Date & Decrease Current Seconds
+          diferent  = (selectedDate - currentDate),
+          lastValMS = diferent - (theDate.getSeconds() * 1000),
+        //===== Span Contain Diffrent Time Between Current & Selected Time
+          theSpan    = document.createElement("span"),
+          spanText   = document.createTextNode(lastValMS),
+          currentTxt = document.createTextNode(currentDate),
+          theCurrent = document.createElement("span");
+          //===== Append Text Span To span
+          theSpan.appendChild(spanText);
+          theCurrent.appendChild(currentTxt);
+          element.appendChild(theSpan);
+          element.appendChild(theCurrent);
+        //===== Set ClassName
+          theSpan.className = "dif_time";    
+          theCurrent.className = "current_t";
+    };
+/** ******* End Function Store The Every Reminders Milliseconds ********** **/
 
-        // Span Contain Diffrent Time Between Current & Selected Time
-          theSpan = document.createElement("span"),
-          spanText = document.createTextNode(dif);
+/** ******* Start Function Handler The Notifition To Every Reminder ******* **/
+    function handlerAllStoredNotification() {
+      if(result.innerHTML !== '') {
+        //====== All Spans Contains Millisecond Of Cards
+        let theSpans    = document.querySelectorAll(".dif_time");
+        let theCurrent  = document.querySelectorAll(".current_t");
+        let theSound    = new Audio("Sound/alarm.mp3"); //==== Set The Sound Source
+        //===== Looping All Span Contain Diffrent Time Between Current & Selected Time
+        theSpans.forEach( (element, index) => {
+          let spanMs = parseInt(element.textContent);
+          timeout = setTimeout(() => {    
+             // ======= Set Title & Subject On Notification Body From Exist Reminder
+              let notiTitle   = document.querySelectorAll(".card_title")[index].textContent;
+              let notiSubject = document.querySelectorAll(".card_subject")[index].textContent;
+              let theCard = document.querySelectorAll('.reminder_card')[index];
+              //===== Set arguments On Notification
+              notifyMe(notiTitle, notiSubject);
+              //===== Add Completed Class Name On Finished Task Card                
+              theCard.classList.add('completed');
+              //==== Remove Exist Span Contain Diffrent Time & Current Time
+              element.remove();
+              theCurrent[index].remove();
+              //==== Play The Sound
+              theSound.play();
+              //===== Run Saved Reminders Function .  
+              localStorage.setItem('items', result.innerHTML);              
+            }, spanMs);
+        });
+      };
+    };
+    handlerAllStoredNotification();
+/** ******* End Function Handler The Notifition To Every Reminder ******* **/
+    
+    /** ************** If The User Close Tap  ************** **/
+    window.addEventListener('beforeunload',  (e) => {
+      return sessionStorage.setItem('tapClosed', 'No');
+    });
 
-      // Append Text Span To span
-        theSpan.appendChild(spanText);
-        element.appendChild(theSpan);
-
-      // Set ClassName
-        theSpan.className = "dif_time";
-
-      // Check The Invaild D
-        if (dif < 0) {
-          alert("Invaild Date");
-          theSpan.textContent = 0;
+/** ********* Start Function Handler If The Page Load Or Close & Open Again ********** **/
+    window.onload = () => {   
+      if(result.innerHTML !== '') {
+        if(sessionStorage.getItem('tapClosed') === null) {
+          clearTimeout(timeout);
+          Array.from(result.querySelectorAll('.dif_time')).forEach((el, index) => {
+            let pastDate = result.querySelectorAll('.current_t')[index].textContent;
+            let theDate  = new Date();  //==== Set NeW Date
+            //==== Set Value Of The New Date
+            let currentDate = new Date(theDate.getFullYear(), theDate.getMonth(), theDate.getDate(), theDate.getHours(), theDate.getMinutes(), 0);
+            //===== Set Value Of Past date
+            let pastDateVal     = new Date(pastDate);
+            let theDifferent    = parseInt(el.textContent);
+            let thecurrSeconds  = (theDate.getSeconds() * 1000);
+            let theNewCurrent   = (currentDate - pastDateVal);
+            let theNewDifferent = (theDifferent - theNewCurrent);
+            el.innerHTML        = theNewDifferent - thecurrSeconds;
+            //====== Run Function Handler The Notifition To Every Reminder 
+            handlerAllStoredNotification();
+          });
         };
+      };
     };
-
-    // This Statement Run The Cards Notification And Sound
-    if (result.innerHTML !== "") {
-      // All Spans Contains Millisecond Of Cards
-      let theSpans = document.querySelectorAll(".dif_time");
-      // Set The Sound Source
-      let theSound = new Audio("Sound/classic-alarm-2.mp3");
-      // Looping All Span Contain Diffrent Time Between Current & Selected Time
-      theSpans.forEach(function (element) {
-        let spanMs = parseInt(element.textContent);
-        setTimeout(() => {
-          // Set Title & Subject On Notification Body From Exist Reminder
-          let notiTitle = element.parentElement.querySelector(".card_title").textContent;
-          let notiSubject = element.parentElement.querySelector(".card_subject").textContent;
-          // Set arguments On Notification
-          notifyMe(notiTitle, notiSubject);
-          // Set Completed Class Name On Finished Task Card
-          element.parentElement.classList.add("completed");
-          // Remove Exist Span Contain Diffrent Time
-          element.remove();
-          // Play The Sound
-          theSound.play();
-          // Cach Other Reminders On Localstorage
-          localStorage.setItem("items", result.innerHTML);
-        }, spanMs);
-      });
-    };
-  /** ************************** End Finlize Reminder Notification And Sound ******************************************* */
-  
+/** ********* End Function Handler If The Page Load Or Close & Open Again ********** **/
+    
 /** ****************************
     End The Reminder App
-********************************** */
-
-
+********************************** **/

@@ -28,17 +28,17 @@
 								<!-- Parent Contain My App Fields & Buttons & Saved Reminder-->
 								<div class="reminder_parent">		
 									<!-- Reminder Set Button  -->
-									<button id="set_btn" class="set_btn main_btn"></button>
+									<button id="set_btn" class="set_btn main_btn" title="Create Reminder"></button>
 									<!-- Reminder Data Fill Inputs And Textarea -->
-									<div class="reminder_fill col-md-6">
+									<div class="reminder_fill opened col-md-6">
 										<form action="Get" id="form">
 											<!-- Input Time And Date -->
-											<input type="date" id="date" required>
-											<input type="time" id="time" required>
+											<input type="date" id="date" >
+											<input type="time" id="time" >
 											<!-- Reminder Title -->
-											<input type="text" id="title" placeholder=" title" required>
+											<input type="text" id="title" placeholder=" title" autocomplete="off" >
 											<!-- Reminder Subject -->
-											<textarea name="subject" id="subject" cols="30" rows="8" placeholder=" description"></textarea>
+											<textarea name="subject" id="subject" autocomplete="off" cols="30" rows="8" placeholder=" description"></textarea>
 											<!-- The Result -->
 											<div class="message"></div>
 										</form>
@@ -57,7 +57,7 @@
 											<!-- Show Completed Task Button -->
 											<span class="completed_btn" title="Completed Tasks"></span>
 											<!-- Delete All Tasks Button -->
-											<span class="delete_all" title="Delete All"></span>
+											<span class="delete_all" title="Delete All Tasks"></span>
 										</div>
 										<!-- Count Reminder You Created -->
 										<div class="count"></div>
