@@ -27,7 +27,6 @@ This application helps you to save your thoughts or create an alert to remind yo
 
 # Lincess
 
-********************************\*\*********************************/
 
 - Author : [Ali sabry](https://www.linkedin.com/in/ali-sabry/)
 - Created : 2021.
