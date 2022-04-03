@@ -115,7 +115,7 @@
       /* Set The TextContent Of Reminder card And Delete Icon */
 
         // card Date
-          cardDate.textContent = new Date(date.valueAsNumber).toLocaleDateString();
+          cardDate.innerHTML = `<pre>${new Date(date.valueAsNumber).toLocaleDateString()}<pre/>`;
 
         // Set Card Time Value
           cardTime.textContent = new Date(setTimeVal).toLocaleTimeString();
